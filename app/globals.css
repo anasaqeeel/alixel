@@ -1,0 +1,484 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated to professional black-based color scheme with emerald accents */
+  --background: oklch(1 0 0); /* Pure white background */
+  --foreground: oklch(0.25 0.01 264); /* Dark slate gray for text */
+  --card: oklch(0.98 0.005 264); /* Very light gray for cards */
+  --card-foreground: oklch(0.35 0.01 264); /* Dark gray for card text */
+  --popover: oklch(1 0 0); /* White popover background */
+  --popover-foreground: oklch(0.25 0.01 264); /* Dark text on popovers */
+  --primary: oklch(0.25 0.01 264); /* Slate gray primary */
+  --primary-foreground: oklch(1 0 0); /* White text on primary */
+  --secondary: oklch(0.35 0.01 264); /* Medium gray secondary */
+  --secondary-foreground: oklch(1 0 0); /* White text on secondary */
+  --muted: oklch(0.96 0.005 264); /* Light gray muted background */
+  --muted-foreground: oklch(0.45 0.01 264); /* Medium gray muted text */
+  --accent: oklch(0.55 0.15 160); /* Emerald accent color */
+  --accent-foreground: oklch(1 0 0); /* White text on accent */
+  --destructive: oklch(0.577 0.245 27.325); /* Red for errors */
+  --destructive-foreground: oklch(1 0 0); /* White text on destructive */
+  --border: oklch(0.9 0.005 264); /* Light gray borders */
+  --input: oklch(0.98 0.005 264); /* Very light gray input background */
+  --ring: oklch(0.55 0.15 160 / 0.5); /* Emerald focus ring */
+  --chart-1: oklch(0.55 0.15 160); /* Emerald for charts */
+  --chart-2: oklch(0.35 0.01 264); /* Dark gray for charts */
+  --chart-3: oklch(0.25 0.01 264); /* Slate gray for charts */
+  --chart-4: oklch(0.45 0.01 264); /* Medium gray for charts */
+  --chart-5: oklch(0.96 0.005 264); /* Light gray for charts */
+  --radius: 0.5rem;
+  --sidebar: oklch(0.25 0.01 264); /* Dark sidebar */
+  --sidebar-foreground: oklch(1 0 0); /* White sidebar text */
+  --sidebar-primary: oklch(0.35 0.01 264); /* Medium gray sidebar elements */
+  --sidebar-primary-foreground: oklch(1 0 0); /* White text on sidebar primary */
+  --sidebar-accent: oklch(0.55 0.15 160); /* Emerald sidebar accent */
+  --sidebar-accent-foreground: oklch(1 0 0); /* White text on sidebar accent */
+  --sidebar-border: oklch(0.35 0.01 264); /* Dark gray sidebar borders */
+  --sidebar-ring: oklch(0.55 0.15 160 / 0.5); /* Emerald sidebar focus ring */
+
+  /* Added custom font variables for Geist and Manrope */
+  --font-sans: var(--font-geist);
+  --font-serif: var(--font-manrope);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.dark {
+  /* Updated dark mode with professional black theme */
+  --background: oklch(0.08 0.005 264); /* Very dark background */
+  --foreground: oklch(0.98 0 0); /* Near white text */
+  --card: oklch(0.12 0.005 264); /* Dark card background */
+  --card-foreground: oklch(0.98 0 0); /* Light card text */
+  --popover: oklch(0.08 0.005 264); /* Dark popover */
+  --popover-foreground: oklch(0.98 0 0); /* Light popover text */
+  --primary: oklch(0.55 0.15 160); /* Emerald primary in dark mode */
+  --primary-foreground: oklch(0.08 0.005 264); /* Dark text on primary */
+  --secondary: oklch(0.25 0.01 264); /* Dark gray secondary */
+  --secondary-foreground: oklch(0.98 0 0); /* Light text on secondary */
+  --muted: oklch(0.15 0.005 264); /* Dark muted background */
+  --muted-foreground: oklch(0.7 0 0); /* Medium light muted text */
+  --accent: oklch(0.65 0.18 160); /* Brighter emerald accent */
+  --accent-foreground: oklch(0.08 0.005 264); /* Dark text on accent */
+  --destructive: oklch(0.396 0.141 25.723); /* Dark mode red */
+  --destructive-foreground: oklch(0.98 0 0); /* Light text on destructive */
+  --border: oklch(0.2 0.005 264); /* Dark borders */
+  --input: oklch(0.15 0.005 264); /* Dark input background */
+  --ring: oklch(0.65 0.18 160 / 0.5); /* Bright emerald focus ring */
+  --chart-1: oklch(0.65 0.18 160); /* Bright emerald for charts */
+  --chart-2: oklch(0.7 0.15 200); /* Blue for charts */
+  --chart-3: oklch(0.75 0.12 60); /* Yellow for charts */
+  --chart-4: oklch(0.6 0.2 320); /* Purple for charts */
+  --chart-5: oklch(0.8 0.1 30); /* Orange for charts */
+  --sidebar: oklch(0.08 0.005 264); /* Very dark sidebar */
+  --sidebar-foreground: oklch(0.98 0 0); /* Light sidebar text */
+  --sidebar-primary: oklch(0.55 0.15 160); /* Emerald sidebar primary */
+  --sidebar-primary-foreground: oklch(0.08 0.005 264); /* Dark text on sidebar primary */
+  --sidebar-accent: oklch(0.2 0.005 264); /* Dark sidebar accent */
+  --sidebar-accent-foreground: oklch(0.98 0 0); /* Light text on sidebar accent */
+  --sidebar-border: oklch(0.2 0.005 264); /* Dark sidebar borders */
+  --sidebar-ring: oklch(0.65 0.18 160 / 0.5); /* Bright emerald sidebar focus ring */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Added custom font variables for Geist and Manrope */
+  --font-sans: var(--font-geist);
+  --font-serif: var(--font-manrope);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Added smooth scrolling and custom animations */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.7s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.7s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Enhanced animations and micro-interactions */
+
+  /* Scroll-triggered animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered animations */
+  .animate-stagger-1 {
+    animation-delay: 0.1s;
+  }
+  .animate-stagger-2 {
+    animation-delay: 0.2s;
+  }
+  .animate-stagger-3 {
+    animation-delay: 0.3s;
+  }
+  .animate-stagger-4 {
+    animation-delay: 0.4s;
+  }
+  .animate-stagger-5 {
+    animation-delay: 0.5s;
+  }
+  .animate-stagger-6 {
+    animation-delay: 0.6s;
+  }
+
+  /* Enhanced button animations */
+  .btn-magnetic {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-magnetic::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-magnetic:hover::before {
+    left: 100%;
+  }
+
+  .btn-magnetic:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Card hover effects */
+  .card-hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Floating animation */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Pulse glow effect */
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    from {
+      box-shadow: 0 0 20px rgba(var(--primary), 0.3);
+    }
+    to {
+      box-shadow: 0 0 30px rgba(var(--primary), 0.6);
+    }
+  }
+
+  /* Typewriter effect */
+  .typewriter {
+    overflow: hidden;
+    border-right: 2px solid;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: currentColor;
+    }
+  }
+
+  /* Parallax container */
+  .parallax-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .parallax-element {
+    transform: translateZ(-1px) scale(2);
+  }
+
+  /* Loading spinner */
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(var(--primary), 0.1);
+    border-left-color: rgb(var(--primary));
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Morphing shapes */
+  .morph-shape {
+    animation: morph 8s ease-in-out infinite;
+  }
+
+  @keyframes morph {
+    0%,
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+  }
+
+  /* Text reveal animation */
+  .text-reveal {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .text-reveal::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(var(--primary));
+    transform: translateX(-100%);
+    animation: reveal 1.5s ease-out forwards;
+  }
+
+  @keyframes reveal {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Smooth scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--primary));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--accent));
+  }
+
+  /* Selection styling */
+  ::selection {
+    background: rgba(var(--primary), 0.2);
+    color: rgb(var(--foreground));
+  }
+
+  /* Focus visible improvements */
+  *:focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Image lazy loading effect */
+  .image-lazy {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+  }
+
+  .image-lazy.loaded {
+    opacity: 1;
+  }
+
+  /* Backdrop blur enhancement */
+  .backdrop-blur-enhanced {
+    backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Interactive elements */
+  .interactive-scale {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .interactive-scale:active {
+    transform: scale(0.95);
+  }
+
+  /* Gradient animations */
+  .animate-gradient {
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
