@@ -60,7 +60,7 @@ export function Footer() {
               </div>
               <div className="flex items-center text-muted-foreground">
                 <Phone className="w-4 h-4 mr-2 text-primary" />
-                +1 (555) 123-4567
+                +92 3274989782
               </div>
               <div className="flex items-center text-muted-foreground">
                 <MapPin className="w-4 h-4 mr-2 text-primary" />
