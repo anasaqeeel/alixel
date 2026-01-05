@@ -62,7 +62,7 @@ export function EnhancedHeroSection() {
 
           {/* Main Heading with text reveal */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="gradient-text text-reveal">Premium!! IT Solutions</span>
+            <span className="gradient-text text-reveal">Premium IT Solutions</span>
             <br />
             <span className="text-foreground text-reveal" style={{ animationDelay: "0.5s" }}>
               for Modern Businesses
