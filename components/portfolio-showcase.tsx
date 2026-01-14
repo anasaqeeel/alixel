@@ -171,125 +171,162 @@ export function PortfolioShowcase() {
           {filteredProjects.map((project, index) => (
             <Card
               key={project.title}
-              className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20 bg-card/50 backdrop-blur-sm overflow-hidden"
+              className="group relative hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20 bg-card/50 backdrop-blur-sm overflow-hidden"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <CardContent className="p-0">
-                {/* Project Image */}
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image || "/placeholder.svg?height=300&width=600"}
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+              <CardContent className="relative p-0">
+                {project.link && project.link !== "#" ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${project.title} live demo`}
+                    className="absolute inset-0 z-10"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-primary text-primary-foreground">{project.category}</Badge>
-                  </div>
-                </div>
-
-                {/* Project Info */}
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                  <div className="flex items-center space-x-2">
-                    {project.link && project.link !== "#" ? (
-                      <Button variant="ghost" size="sm" className="p-2 h-auto" asChild>
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`Open ${project.title} live demo`}
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="p-2 h-auto"
-                        disabled
-                        aria-label={`Live demo unavailable for ${project.title}`}
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </Button>
-                    )}
-                    {project.github && project.github !== "#" ? (
-                      <Button variant="ghost" size="sm" className="p-2 h-auto" asChild>
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noreferrer"
-                          aria-label={`Open ${project.title} GitHub repository`}
-                        >
-                          <Github className="w-4 h-4" />
-                        </a>
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="p-2 h-auto"
-                        disabled
-                        aria-label={`GitHub repository unavailable for ${project.title}`}
-                      >
-                        <Github className="w-4 h-4" />
-                      </Button>
-                    )}
-                  </div>
-                  </div>
-
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
-
-                {/* Screenshots */}
-                {project.screenshots?.length ? (
-                  <div className="mb-5">
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                      {project.screenshots.map((screenshot) => (
-                        <div key={screenshot} className="overflow-hidden rounded-md border border-border/60">
-                          <img
-                            src={screenshot}
-                            alt={`${project.title} screenshot`}
-                            className="h-24 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            loading="lazy"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
                 ) : null}
-
-                  {/* Technologies */}
-                  <div className="mb-4">
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
+                <div className="relative z-20">
+                  {/* Project Image */}
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={project.image || "/placeholder.svg?height=300&width=600"}
+                      alt={project.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute top-4 right-4">
+                      <Badge className="bg-primary text-primary-foreground">{project.category}</Badge>
                     </div>
                   </div>
 
-                  {/* Results */}
-                  <div className="mb-4">
-                    <h4 className="font-semibold mb-2 text-sm">Key Results:</h4>
-                    <ul className="space-y-1">
-                      {project.results.map((result) => (
-                        <li key={result} className="flex items-center text-sm text-muted-foreground">
-                          <ArrowRight className="w-3 h-3 text-primary mr-2 flex-shrink-0" />
-                          {result}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {/* Project Info */}
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+                        {project.title}
+                      </h3>
+                      <div className="flex items-center space-x-2">
+                        {project.link && project.link !== "#" ? (
+                          <Button variant="ghost" size="sm" className="p-2 h-auto" asChild>
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label={`Open ${project.title} live demo`}
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="p-2 h-auto"
+                            disabled
+                            aria-label={`Live demo unavailable for ${project.title}`}
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </Button>
+                        )}
+                        {project.github && project.github !== "#" ? (
+                          <Button variant="ghost" size="sm" className="p-2 h-auto" asChild>
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noreferrer"
+                              aria-label={`Open ${project.title} GitHub repository`}
+                            >
+                              <Github className="w-4 h-4" />
+                            </a>
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="p-2 h-auto"
+                            disabled
+                            aria-label={`GitHub repository unavailable for ${project.title}`}
+                          >
+                            <Github className="w-4 h-4" />
+                          </Button>
+                        )}
+                      </div>
+                    </div>
 
-                  {/* Project Details */}
-                  <div className="flex items-center justify-between pt-4 border-t border-border text-sm text-muted-foreground">
-                    <div>Client: {project.client}</div>
-                    <div>Timeline: {project.timeline}</div>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
+
+                    {/* Screenshots */}
+                    {project.screenshots?.length ? (
+                      <div className="mb-5">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                          {project.screenshots.map((screenshot) => (
+                            <div key={screenshot} className="overflow-hidden rounded-md border border-border/60">
+                              <img
+                                src={screenshot}
+                                alt={`${project.title} screenshot`}
+                                className="h-24 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+
+                    {/* Technologies */}
+                    <div className="mb-4">
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech) => (
+                          <Badge key={tech} variant="secondary" className="text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Results */}
+                    <div className="mb-4">
+                      <h4 className="font-semibold mb-2 text-sm">Key Results:</h4>
+                      <ul className="space-y-1">
+                        {project.results.map((result) => (
+                          <li key={result} className="flex items-center text-sm text-muted-foreground">
+                            <ArrowRight className="w-3 h-3 text-primary mr-2 flex-shrink-0" />
+                            {result}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* CTA */}
+                    {(project.link && project.link !== "#") || (project.github && project.github !== "#") ? (
+                      <div className="flex flex-wrap items-center gap-3 mb-4">
+                        {project.link && project.link !== "#" ? (
+                          <Button
+                            size="sm"
+                            className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
+                            asChild
+                          >
+                            <a href={project.link} target="_blank" rel="noreferrer">
+                              View Live
+                              <ExternalLink className="ml-2 h-4 w-4" />
+                            </a>
+                          </Button>
+                        ) : null}
+                        {project.github && project.github !== "#" ? (
+                          <Button variant="outline" size="sm" className="bg-transparent" asChild>
+                            <a href={project.github} target="_blank" rel="noreferrer">
+                              View Code
+                              <Github className="ml-2 h-4 w-4" />
+                            </a>
+                          </Button>
+                        ) : null}
+                      </div>
+                    ) : null}
+
+                    {/* Project Details */}
+                    <div className="flex items-center justify-between pt-4 border-t border-border text-sm text-muted-foreground">
+                      <div>Client: {project.client}</div>
+                      <div>Timeline: {project.timeline}</div>
+                    </div>
                   </div>
                 </div>
               </CardContent>
