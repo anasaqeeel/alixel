@@ -11,6 +11,39 @@ export function PortfolioShowcase() {
 
   const projects = [
     {
+      title: "Voice AI Assistant",
+      category: "AI/ML",
+      description:
+        "Premium voice AI assistant with multiple personalities, real-time voice chat, and animated voice indicators for a polished, mobile-first experience.",
+      image: "/projects/voice-ai/944shots_so.jpeg",
+      screenshots: [
+        "/projects/voice-ai/362shots_so.png",
+        "/projects/voice-ai/526shots_so.png",
+        "/projects/voice-ai/805shots_so.png",
+        "/projects/voice-ai/944shots_so.jpeg",
+        "/projects/voice-ai/Pasted%20image.png",
+      ],
+      technologies: [
+        "Next.js 15",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+        "OpenAI Whisper",
+        "OpenAI TTS",
+        "ElevenLabs",
+      ],
+      results: [
+        "5 distinct AI personalities",
+        "Real-time voice chat with animated feedback",
+        "Privacy-first audio handling",
+      ],
+      client: "Startup MVP",
+      timeline: "6 weeks",
+      link: "https://ai-voice-assistant-production-5d2f.up.railway.app/",
+      github: "https://github.com/anasaqeeel/ai-voice-assistant",
+    },
+    {
       title: "AI-Powered E-commerce Platform",
       category: "AI/ML",
       description:
@@ -161,17 +194,73 @@ export function PortfolioShowcase() {
                     <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
                       {project.title}
                     </h3>
-                    <div className="flex items-center space-x-2">
-                      <Button variant="ghost" size="sm" className="p-2 h-auto">
+                  <div className="flex items-center space-x-2">
+                    {project.link && project.link !== "#" ? (
+                      <Button variant="ghost" size="sm" className="p-2 h-auto" asChild>
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Open ${project.title} live demo`}
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="p-2 h-auto"
+                        disabled
+                        aria-label={`Live demo unavailable for ${project.title}`}
+                      >
                         <ExternalLink className="w-4 h-4" />
                       </Button>
-                      <Button variant="ghost" size="sm" className="p-2 h-auto">
+                    )}
+                    {project.github && project.github !== "#" ? (
+                      <Button variant="ghost" size="sm" className="p-2 h-auto" asChild>
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Open ${project.title} GitHub repository`}
+                        >
+                          <Github className="w-4 h-4" />
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="p-2 h-auto"
+                        disabled
+                        aria-label={`GitHub repository unavailable for ${project.title}`}
+                      >
                         <Github className="w-4 h-4" />
                       </Button>
-                    </div>
+                    )}
+                  </div>
                   </div>
 
                   <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
+
+                {/* Screenshots */}
+                {project.screenshots?.length ? (
+                  <div className="mb-5">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                      {project.screenshots.map((screenshot) => (
+                        <div key={screenshot} className="overflow-hidden rounded-md border border-border/60">
+                          <img
+                            src={screenshot}
+                            alt={`${project.title} screenshot`}
+                            className="h-24 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
 
                   {/* Technologies */}
                   <div className="mb-4">
