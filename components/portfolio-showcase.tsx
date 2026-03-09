@@ -4,10 +4,12 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, ArrowRight, Filter } from "lucide-react"
+import { ExternalLink, Github, ArrowRight, Filter, X } from "lucide-react"
 
 export function PortfolioShowcase() {
   const [activeFilter, setActiveFilter] = useState("All")
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null)
+  const [lightboxTitle, setLightboxTitle] = useState("")
 
   const projects = [
     {
@@ -71,7 +73,7 @@ export function PortfolioShowcase() {
       ],
       client: "B2B Sales Consultant",
       timeline: "8 weeks",
-      link: "#",
+      link: "https://lav1.com/podcast/",
       github: "https://github.com/anasaqeeel/NotebookLM-clone",
     },
     {
@@ -202,19 +204,17 @@ export function PortfolioShowcase() {
           {filteredProjects.map((project, index) => (
             <Card
               key={project.title}
-              className="group relative hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20 bg-card/50 backdrop-blur-sm overflow-hidden"
+              className="group relative hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20 bg-card/50 backdrop-blur-sm overflow-hidden cursor-pointer"
               style={{ animationDelay: `${index * 100}ms` }}
+              onClick={() => {
+                if (project.link && project.link !== "#") {
+                  if (typeof window !== "undefined") {
+                    window.open(project.link, "_blank", "noopener,noreferrer")
+                  }
+                }
+              }}
             >
               <CardContent className="relative p-0">
-                {project.link && project.link !== "#" ? (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`Open ${project.title} live demo`}
-                    className="absolute inset-0 z-10"
-                  />
-                ) : null}
                 <div className="relative z-20">
                   {/* Project Image */}
                   <div className="relative overflow-hidden">
@@ -290,11 +290,19 @@ export function PortfolioShowcase() {
                       <div className="mb-5">
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                           {project.screenshots.map((screenshot) => (
-                            <div key={screenshot} className="overflow-hidden rounded-md border border-border/60">
+                            <div
+                              key={screenshot}
+                              className="overflow-hidden rounded-md border border-border/60 bg-background/80 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 cursor-zoom-in"
+                              onClick={(event) => {
+                                event.stopPropagation()
+                                setLightboxImage(screenshot)
+                                setLightboxTitle(project.title)
+                              }}
+                            >
                               <img
                                 src={screenshot}
                                 alt={`${project.title} screenshot`}
-                                className="h-24 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                className="h-24 w-full object-cover transition-transform duration-300 group-hover:scale-105 hover:scale-110"
                                 loading="lazy"
                               />
                             </div>
@@ -385,6 +393,32 @@ export function PortfolioShowcase() {
           </div>
         </div>
       </div>
+
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          onClick={() => setLightboxImage(null)}
+        >
+          <div
+            className="relative max-w-5xl w-full"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setLightboxImage(null)}
+              className="absolute -top-4 -right-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-background/90 text-foreground shadow-lg hover:bg-background"
+              aria-label="Close screenshot preview"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <img
+              src={lightboxImage}
+              alt={`${lightboxTitle || "Project"} screenshot enlarged`}
+              className="w-full h-auto rounded-xl border border-border/80 shadow-2xl bg-background"
+            />
+          </div>
+        </div>
+      )}
     </section>
   )
 }
