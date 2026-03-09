@@ -44,6 +44,37 @@ export function PortfolioShowcase() {
       github: "https://github.com/anasaqeeel/ai-voice-assistant",
     },
     {
+      title: "AI Podcast Generator",
+      category: "AI/ML",
+      description:
+        "NotebookLM-inspired podcast generator that creates personalized, under-a-minute AI dialogues for live sales demos, with real-time Q&A and studio-grade audio.",
+      image: "/projects/ai-podcast/625shots_so.png",
+      screenshots: [
+        "/projects/ai-podcast/625shots_so.png",
+        "/projects/ai-podcast/680shots_so.png",
+        "/projects/ai-podcast/822shots_so.png",
+      ],
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "OpenAI GPT-4",
+        "OpenAI GPT-3.5",
+        "ElevenLabs",
+        "FFmpeg",
+        "Vercel",
+      ],
+      results: [
+        "Sub-30 second podcast generation",
+        "Prospect-personalized scripts with industry context",
+        "Interactive follow-up Q&A woven into playback",
+      ],
+      client: "B2B Sales Consultant",
+      timeline: "8 weeks",
+      link: "#",
+      github: "https://github.com/anasaqeeel/NotebookLM-clone",
+    },
+    {
       title: "AI-Powered E-commerce Platform",
       category: "AI/ML",
       description:
